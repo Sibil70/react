@@ -1,12 +1,11 @@
 import React from 'react';
-import Logo from './logo/logo';
+import Logo from './Logo/Logo';
+import Menu from './Menu/Menu'
 import './header.css'
-import Menu from './menu/menu'
 
-
-const Header = () => {
+const Header = (props) => {
     return (
-        <div className="header">
+        <div className="header" onClick={props.func}>
             <Logo />
             <Menu />
         </div>

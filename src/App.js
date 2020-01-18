@@ -1,30 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './header/header'
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <Header />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
-        </header>
+import './App.css';
+import Header from './Header/Header';
+import Login from './Pages/Login/Login';
+import Map from './Pages/Map/Map';
+import Profile from './Pages/Profile/Profile';
+
+const pages = {
+  Profile: <Profile/>,
+  Map: <Map/>,
+  Login: <Login/>,
+};
+class App extends React.Component {
+
+  state = {
+    currentPage: '',
+  }
+
+  changePage = (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      let pageFromBtn = e.target.dataset.page;
+      this.setState({ currentPage: pages[pageFromBtn]})
+    }
+
+  }
+  render() {
+    return (
+      <div className="App">
+        <div className="container">
+          <Header func={this.changePage} />
+          {this.state.currentPage}
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
 
 export default App;

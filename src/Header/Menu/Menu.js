@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuList from '../menu-list/menu-list';
+import MenuList from '../Menu-list/Menu-list';
 import './menu.scss'
 
 const Menu = () => {
