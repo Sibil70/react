@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from './Logo/Logo';
 import Menu from './Menu/Menu'
-import './header.css'
+import './header.scss'
 
 const Header = (props) => {
     return (
