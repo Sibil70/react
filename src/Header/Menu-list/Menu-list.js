@@ -1,25 +1,18 @@
 import React from 'react';
 
-const buttonHandler = (e) => {
-    console.log(e.target);
-    console.log(e.currentTarget);
-}
-
-
-const MenuList = (props) => {
-
-    const item = props.menuItems;
-    const menuBtns = Object.keys(item);
+const MenuList = ({ changePage, activePage, pages }) => {
+    const page = pages;
+    const pageBtn = Object.keys(page);
 
     return (
-        <ul className="menu__list" onClick={buttonHandler}>
-            {menuBtns.map(
-                    menuItem =>
-                        <li className='menu__item' key={menuItem}>
-                            <button data-page={menuItem}> {item[menuItem]} </button>
-                        </li>
-                )
-                }
+        <ul className="menu__list">
+            {pageBtn.map(
+                pageItem =>
+                    <li className={`${activePage === pageItem ? 'active' : null} menu__item`} key={pageItem}>
+                        <button onClick={changePage} data-page={pageItem}> {page[pageItem].title} </button>
+                    </li>
+            )
+            }
         </ul>
     )
 }

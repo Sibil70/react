@@ -1,15 +1,11 @@
 import React from 'react';
 import MenuList from '../Menu-list/Menu-list';
 import './menu.scss'
-const menuItems = {
-    Login: "Логин",
-    Map: "Карта",
-    Profile: "Профиль"
-};
-const Menu = () => {
+
+const Menu = (props) => {
     return (
         <nav className="menu">
-            <MenuList menuItems={menuItems}/>
+            <MenuList {...props}/>
         </nav>
     )
 };

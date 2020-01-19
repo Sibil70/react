@@ -5,9 +5,9 @@ import './header.scss'
 
 const Header = (props) => {
     return (
-        <div className="header" onClick={props.func}>
+        <div className="header">
             <Logo />
-            <Menu />
+            <Menu  {...props}/>
         </div>
     )
 };
