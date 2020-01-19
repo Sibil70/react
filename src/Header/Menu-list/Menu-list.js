@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-const menuItems = {
-    Login: "Логин",
-    Map: "Карта",
-    Profile: "Профиль"
-};
-
-const buttonHandler = (e)=>{
+const buttonHandler = (e) => {
     console.log(e.target);
-    console.log(e.currentTarget);    
+    console.log(e.currentTarget);
 }
 
-const menuBtns = Object.keys(menuItems);
 
-class MenuList extends Component {
-    render() {
-        return (
-            <ul className="menu__list" onClick={buttonHandler}>
-                {menuBtns.map(
+const MenuList = (props) => {
+
+    const item = props.menuItems;
+    const menuBtns = Object.keys(item);
+
+    return (
+        <ul className="menu__list" onClick={buttonHandler}>
+            {menuBtns.map(
                     menuItem =>
                         <li className='menu__item' key={menuItem}>
-                            <button data-page={menuItem}> {menuItem} </button>
+                            <button data-page={menuItem}> {item[menuItem]} </button>
                         </li>
                 )
                 }
-            </ul>
-        )
-    }
+        </ul>
+    )
 }
 
 export default MenuList;
