@@ -7,30 +7,30 @@ import Map from './Pages/Map/Map';
 import Profile from './Pages/Profile/Profile';
 import Registration from './Pages/Registration/Registration';
 
-const pages = {
-  profile: {
-    title: 'Профиль',
-    name: 'profile',
-    component:   () => <Profile />,
-  },
-  map: {
-    title: 'Карта',
-    name: 'map',
-    component:   
-    () => <Map />,
-  },
-  registration: {
-    title: 'Регистрация',
-    name: 'registration',
-    component: () => <Registration />,
-  },
-  login: {
-    title: 'Войти',
-    name: 'login',
-    component:   () => <Login />
-  }
-};
 class App extends React.Component {
+  pages = {
+    profile: {
+      title: 'Профиль',
+      name: 'profile',
+      component: () => <Profile />,
+    },
+    map: {
+      title: 'Карта',
+      name: 'map',
+      component:
+        () => <Map />,
+    },
+    registration: {
+      title: 'Регистрация',
+      name: 'registration',
+      component: () => <Registration />,
+    },
+    login: {
+      title: 'Войти',
+      name: 'login',
+      component: () => <Login submitLogin={this.submitLogin} />
+    }
+  }
 
   state = {
     activePage: 'login'
@@ -40,13 +40,17 @@ class App extends React.Component {
     this.setState({ activePage: e.target.dataset.page })
   }
 
+  submitLogin = () => {
+    this.setState( {activePage: 'map'})
+  }
+
   render() {
     const { activePage } = this.state;
     return (
       <div className="App">
         <div className="container">
-          <Header changePage={this.changePage} activePage={activePage} pages={pages}/>
-          {pages[activePage].component()}
+          <Header changePage={this.changePage} activePage={activePage} pages={this.pages}/>
+          {this.pages[activePage].component()}
         </div>
       </div>
     )
