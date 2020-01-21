@@ -1,30 +1,64 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Header from './header/header'
 
-function App() {
-  return (
-    <div className="App">
-      <div className="container">
-        <Header />
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
-        </header>
+import './App.scss';
+import Header from './Header/Header';
+import Login from './Pages/Login/Login';
+import Map from './Pages/Map/Map';
+import Profile from './Pages/Profile/Profile';
+import Registration from './Pages/Registration/Registration';
+
+class App extends React.Component {
+  pages = {
+    profile: {
+      title: 'Профиль',
+      name: 'profile',
+      component: () => <Profile />,
+    },
+    map: {
+      title: 'Карта',
+      name: 'map',
+      component:
+        () => <Map />,
+    },
+    registration: {
+      title: 'Регистрация',
+      name: 'registration',
+      component: () => <Registration />,
+    },
+    login: {
+      title: 'Войти',
+      name: 'login',
+      component: () => <Login submitLogin={this.submitLogin} />
+    }
+  }
+
+  state = {
+    activePage: 'login'
+  }
+
+  changePage = (e) => {
+    this.setState({ activePage: e.target.dataset.page })
+  }
+
+  submitLogin = () => {
+    this.setState( {activePage: 'map'})
+  }
+
+  render() {
+    const { activePage } = this.state;
+    return (
+      <div className="App">
+        <div className="container">
+          <Header changePage={this.changePage} activePage={activePage} pages={this.pages}/>
+          {
+          this.pages[activePage]
+          ? this.pages[activePage].component()
+          : 'Компонент не найден'
+          }
+        </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
 
 export default App;

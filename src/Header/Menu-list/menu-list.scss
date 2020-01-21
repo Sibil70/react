@@ -1,0 +1,14 @@
+.menu__item {
+    button{
+        user-select: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:focus{
+            outline: none;
+        }
+        &.active{
+            border-color: seagreen;
+        }
+    }
+}
