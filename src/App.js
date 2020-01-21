@@ -50,7 +50,11 @@ class App extends React.Component {
       <div className="App">
         <div className="container">
           <Header changePage={this.changePage} activePage={activePage} pages={this.pages}/>
-          {this.pages[activePage].component()}
+          {
+          this.pages[activePage]
+          ? this.pages[activePage].component()
+          : 'Компонент не найден'
+          }
         </div>
       </div>
     )
