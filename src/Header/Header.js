@@ -8,13 +8,13 @@ const Header = (props) => {
     return (
         <div className="header">
             <Logo />
-            <Menu  {...props}/>
+            <Menu  {...props} />
         </div>
     )
 };
 
 Header.propTypes = {
-    changePage: PropTypes.func, 
+    changePage: PropTypes.func,
     activePage: PropTypes.string,
     pages: PropTypes.object
 }

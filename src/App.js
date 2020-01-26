@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 
 import './App.scss';
 import Header from './Header/Header';
 import Login from './Pages/Login/Login';
 import Map from './Pages/Map/Map';
 import Profile from './Pages/Profile/Profile';
-import Registration from './Pages/Registration/Registration';
 
-class App extends React.Component {
-  pages = {
+export const { Provider, Consumer } = createContext();
+
+const App = () => {
+  const [activePage, setPage] = useState('login');
+  const [isLogged, setLogged] = useState(false);
+
+  const authStatus = {
+    login: (email, password) => {
+      if (email !== '' && password !== '') {
+        setLogged(true);
+        setPage('map');
+      }
+    },
+
+    logout: () => {
+      setLogged(false);
+      setPage('login')
+    }
+  };
+
+  const changePage = (e) => {
+    if(isLogged ){
+      setPage(e.target.dataset.page)
+    } else {
+      setPage('login')
+    } 
+  }
+
+  const submitLogin = (e) => {
+    e.preventDefault();
+    const formElements = e.target.elements;
+    authStatus.login(formElements.login.value, formElements.password.value);
+  }
+
+  const pages = {
     profile: {
       title: 'Профиль',
       name: 'profile',
@@ -17,48 +49,29 @@ class App extends React.Component {
     map: {
       title: 'Карта',
       name: 'map',
-      component:
-        () => <Map />,
-    },
-    registration: {
-      title: 'Регистрация',
-      name: 'registration',
-      component: () => <Registration />,
+      component: () => <Map />,
     },
     login: {
-      title: 'Войти',
+      title: 'Выйти',
       name: 'login',
-      component: () => <Login submitLogin={this.submitLogin} />
+      component: () => <Login submitLogin={submitLogin} />
     }
   }
 
-  state = {
-    activePage: 'login'
-  }
-
-  changePage = (e) => {
-    this.setState({ activePage: e.target.dataset.page })
-  }
-
-  submitLogin = () => {
-    this.setState( {activePage: 'map'})
-  }
-
-  render() {
-    const { activePage } = this.state;
-    return (
+  return (
+    <Provider value={authStatus}>
       <div className="App">
         <div className="container">
-          <Header changePage={this.changePage} activePage={activePage} pages={this.pages}/>
+          {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} />}
           {
-          this.pages[activePage]
-          ? this.pages[activePage].component()
-          : 'Компонент не найден'
+            pages[activePage]
+              ? pages[activePage].component()
+              : 'Компонент не найден'
           }
         </div>
       </div>
-    )
-  }
+    </Provider>
+  )
 }
 
 export default App;

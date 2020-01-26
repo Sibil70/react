@@ -10,7 +10,12 @@ const MenuList = ({ changePage, activePage, pages }) => {
             {pageBtn.map(
                 pageItem =>
                     <li className="menu__item" key={pageItem}>
-                        <button className={`${activePage === pageItem ? 'active' : null}`}onClick={changePage} data-page={pageItem}> {pages[pageItem].title} </button>
+                        <button 
+                            className={`${activePage === pageItem ? 'active' : null}`} 
+                            onClick={changePage} 
+                            data-page={pageItem}> 
+                            {pages[pageItem].title} 
+                        </button>
                     </li>
             )
             }
