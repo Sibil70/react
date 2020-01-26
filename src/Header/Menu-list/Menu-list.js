@@ -1,5 +1,7 @@
 import React from 'react';
-import './menu-list.scss'
+import PropTypes from 'prop-types';
+import './menu-list.scss';
+
 const MenuList = ({ changePage, activePage, pages }) => {
     const pageBtn = Object.keys(pages);
 
@@ -14,6 +16,12 @@ const MenuList = ({ changePage, activePage, pages }) => {
             }
         </ul>
     )
+}
+
+MenuList.propTypes = {
+    changePage: PropTypes.func, 
+    activePage: PropTypes.string,
+    pages: PropTypes.object
 }
 
 export default MenuList;

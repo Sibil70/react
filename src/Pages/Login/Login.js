@@ -1,6 +1,8 @@
 import React from 'react';
-import Submit from '../../Components/Submit/Submit'
-import Input from '../../Components/Input/Input'
+import PropTypes from 'prop-types';
+import Submit from '../../Components/Submit/Submit';
+import Input from '../../Components/Input/Input';
+
 
 const Login = ({ submitLogin }) => {
 
@@ -15,5 +17,9 @@ const Login = ({ submitLogin }) => {
         </section>
     )
 };
+
+Login.propTypes = {
+    submitLogin: PropTypes.func
+}
 
 export default Login;

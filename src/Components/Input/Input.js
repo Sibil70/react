@@ -1,7 +1,8 @@
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
- const Input = ({descript, type, setClass}) => {
+const Input = ({descript, type, setClass}) => {
     return (
         <>
         <label className="input input-wrap">
@@ -10,6 +11,12 @@ import React from 'react';
         </label>
         </>
     )
+}
+
+Input.propTypes = {
+    descript: PropTypes.string,
+    type: PropTypes.string, 
+    setClass: PropTypes.string,
 }
 
 export default Input

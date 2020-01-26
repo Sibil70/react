@@ -1,5 +1,6 @@
 import React from 'react';
 import mapboxgl from 'mapbox-gl';
+import PropTypes from 'prop-types';
 import './mapbox.scss';
 
 class Map extends React.Component {
@@ -18,16 +19,21 @@ class Map extends React.Component {
     componentWillUnmount() {
       this.map.remove();
     }
-  
+
+    style = {
+      position: 'absolute',
+      top: 80,
+      bottom: 0,
+      width: '100%'
+    };
+
+    static propTypes = {
+      style: PropTypes.object,
+      map: PropTypes.object
+    }
     render() {
-      const style = {
-        position: 'absolute',
-        top: 80,
-        bottom: 0,
-        width: '100%'
-      };
-  
-      return <div style={style} ref={el => this.mapContainer = el} />;
+
+      return <div style={this.style} ref={el => this.mapContainer = el} />;
     }
   }
 
