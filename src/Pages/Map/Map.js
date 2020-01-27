@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import PropTypes from 'prop-types';
 import mapboxToken from '../../tokens/tokens'
 import './mapbox.scss';
 
@@ -27,15 +26,11 @@ const Map = () => {
     position: 'absolute',
     top: 80,
     bottom: 0,
-    width: '100%'
+    left: 15,
+    right: 15,
   };
 
   return <div className="map" style={style} ref={el => mapContainer = el} />;
-}
-
-Map.propTypes = {
-  style: PropTypes.object,
-  map: PropTypes.object
 }
 
 export default Map;

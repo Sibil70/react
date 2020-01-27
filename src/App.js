@@ -27,11 +27,13 @@ const App = () => {
   };
 
   const changePage = (e) => {
-    if(isLogged ){
+    if (e.target.dataset.page === 'login') {
+      authStatus.logout()
+    }
+
+    if (isLogged) {
       setPage(e.target.dataset.page)
-    } else {
-      setPage('login')
-    } 
+    }
   }
 
   const submitLogin = (e) => {
