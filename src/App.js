@@ -1,10 +1,15 @@
+// react & router
 import React, { useState, createContext } from 'react';
+import { Route } from 'react-router-dom';
 
-import './App.scss';
+// components
 import Header from './Header/Header';
 import Login from './Pages/Login/Login';
 import Map from './Pages/Map/Map';
 import Profile from './Pages/Profile/Profile';
+
+// style
+import './App.scss';
 
 export const { Provider, Consumer } = createContext();
 
@@ -61,15 +66,11 @@ const App = () => {
   }
 
   return (
-    <Provider value={authStatus}>
+    <Provider>
       <div className="App">
         <div className="container">
-          {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} />}
-          {
-            pages[activePage]
-              ? pages[activePage].component()
-              : 'Компонент не найден'
-          }
+          {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} setPage={setPage}/>}
+          <Route path={`/${pages[activePage].name}`} component={pages[activePage].component}/>
         </div>
       </div>
     </Provider>

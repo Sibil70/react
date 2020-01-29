@@ -14,7 +14,7 @@ const Menu = (props) => {
 };
 
 Menu.propTypes = {
-    changePage: PropTypes.func.isRequired, 
+    changePage: PropTypes.func.isRequired,
     activePage: PropTypes.string.isRequired,
     pages: PropTypes.object.isRequired
 }
