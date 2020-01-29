@@ -1,5 +1,8 @@
 import React from 'react';
-import './menu-list.scss'
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import './menu-list.scss';
+
 const MenuList = ({ changePage, activePage, pages }) => {
     const pageBtn = Object.keys(pages);
 
@@ -8,12 +11,23 @@ const MenuList = ({ changePage, activePage, pages }) => {
             {pageBtn.map(
                 pageItem =>
                     <li className="menu__item" key={pageItem}>
-                        <button className={`${activePage === pageItem ? 'active' : null}`}onClick={changePage} data-page={pageItem}> {pages[pageItem].title} </button>
+                        <button 
+                            className={classnames({ active: activePage === pageItem })}
+                            onClick={changePage} 
+                            data-page={pageItem}> 
+                            {pages[pageItem].title} 
+                        </button>
                     </li>
             )
             }
         </ul>
     )
+}
+
+MenuList.propTypes = {
+    changePage: PropTypes.func.isRequired, 
+    activePage: PropTypes.string.isRequired,
+    pages: PropTypes.object.isRequired
 }
 
 export default MenuList;
