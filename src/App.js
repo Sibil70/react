@@ -7,6 +7,7 @@ import Header from './Header/Header';
 import Login from './Pages/Login/Login';
 import Map from './Pages/Map/Map';
 import Profile from './Pages/Profile/Profile';
+import Register from './Pages/Register/Register';
 import NotFound from './Pages/404/404';
 
 // style
@@ -19,8 +20,8 @@ const App = () => {
   const [isLogged, setLogged] = useState(false);
 
   const authStatus = {
-    login: (email, password) => {
-      if (email !== '' && password !== '') {
+    login: (data) => {
+      if (data.success === true && data.token !== '') {
         setLogged(true);
         setPage('map');
       }
@@ -36,16 +37,17 @@ const App = () => {
     if (e.target.dataset.page === 'login') {
       authStatus.logout()
     }
-
+    if (e.target.dataset.page === 'register') {
+      setPage(e.target.dataset.page)
+    }
     if (isLogged) {
       setPage(e.target.dataset.page)
     }
   }
 
-  const submitLogin = (e) => {
-    e.preventDefault();
-    const formElements = e.target.elements;
-    authStatus.login(formElements.login.value, formElements.password.value);
+  const submitLogin = (data) => {
+    authStatus.login(data);
+    setPage('map');
   }
 
   const pages = {
@@ -59,10 +61,15 @@ const App = () => {
       name: 'map',
       component: () => <Map />,
     },
+    register: {
+      title: 'Регистрация',
+      name: 'register',
+      component: () => <Register changePage={changePage} />,
+    },
     login: {
       title: 'Выйти',
       name: 'login',
-      component: () => <Login submitLogin={submitLogin} />
+      component: () => <Login submitLogin={submitLogin} changePage={changePage} />
     }
   }
 
@@ -70,11 +77,11 @@ const App = () => {
     <Provider>
       <div className="App">
         <div className="container">
-          {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} setPage={setPage}/>}
+          {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} setPage={setPage} />}
           <Switch>
-            <Route path="/" component={pages[activePage].component} exact/>
-            <Route path={`/${pages[activePage].name}`} component={pages[activePage].component}/>
-            <Route path="*" component={NotFound}/>
+            <Route path="/" component={pages[activePage].component} exact />
+            <Route path={`/${pages[activePage].name}`} component={pages[activePage].component} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </div>
