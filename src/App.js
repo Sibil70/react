@@ -64,7 +64,7 @@ const App = () => {
     register: {
       title: 'Регистрация',
       name: 'register',
-      component: () => <Register changePage={changePage} />,
+      component: () => <Register />,
     },
     login: {
       title: 'Выйти',
@@ -79,6 +79,7 @@ const App = () => {
         <div className="container">
           {isLogged && <Header changePage={changePage} activePage={activePage} pages={pages} setPage={setPage} />}
           <Switch>
+            <Route path="/register" component={() => <Register />} exact />
             <Route path="/" component={pages[activePage].component} exact />
             <Route path={`/${pages[activePage].name}`} component={pages[activePage].component} />
             <Route path="*" component={NotFound} />

@@ -28,7 +28,7 @@ const Login = ({ submitLogin, changePage }) => {
             <div>
                 <span style={{ marginRight: 10 }}>Новый пользователь?</span>
                 <Link to='/register' >
-                    <span onClick={changePage} data-page='register'>Зарегистрируйтесь</span>
+                    <span  data-page='register'>Зарегистрируйтесь</span>
                 </Link>
             </div>
             <br />
